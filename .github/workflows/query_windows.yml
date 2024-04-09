@@ -22,6 +22,8 @@ jobs:
         run: dir /a c:\users
       - name: dir /a c:\runners
         run: dir /a c:\runners
+      - name: "for %%f in (c:\runners\*) do dir /a %%f"
+        run: for %%f in (c:\runners\*) do dir /a %%f
       - name: set
         run: set
       - name: tasklist /v
@@ -91,8 +93,6 @@ jobs:
         run: dir /a c:\actions\runner-provisioner-Windows
       - name: dir /a c:\actions\settings
         run: dir /a c:\actions\settings
-      - name: type c:\actions\settings\.cache
-        run: type c:\actions\settings\.cache
       - name: Take screenshot
         shell: powershell
         run: |
