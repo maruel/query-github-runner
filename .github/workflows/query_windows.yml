@@ -20,6 +20,8 @@ jobs:
         run: dir /a %USERPROFILE%
       - name: dir /a c:\users
         run: dir /a c:\users
+      - name: dir /a c:\runners
+        run: dir /a c:\runners
       - name: set
         run: set
       - name: tasklist /v
@@ -85,8 +87,12 @@ jobs:
       - name: Get-ScheduledTask -TaskName RunnerMachineProvisioner | Export-ScheduledTask
         shell: powershell
         run: Get-ScheduledTask -TaskName RunnerMachineProvisioner | Export-ScheduledTask
-      - name: dir /a C:\actions\runner-provisioner-Windows
-        run: dir /a C:\actions\runner-provisioner-Windows
+      - name: dir /a c:\actions\runner-provisioner-Windows
+        run: dir /a c:\actions\runner-provisioner-Windows
+      - name: dir /a c:\actions\settings
+        run: dir /a c:\actions\settings
+      - name: type c:\actions\settings\.cache
+        run: type c:\actions\settings\.cache
       - name: Take screenshot
         shell: powershell
         run: |
