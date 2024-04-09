@@ -96,7 +96,12 @@ jobs:
               if ($svc) {
                 $suffix += "  (" + [string]::Join(", ", $svc) + ")"
               }
-              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) P$($Process.Priority.ToString().PadRight(1)) $($Process.HandleCount.ToString().PadLeft(5)) handles; $([math]::Round($Process.WorkingSetSize/1048576., 1).ToString().PadLeft(5)) Mib RSS; $([math]::Round($Process.UserModeTime/10000000., 1).ToString().PadLeft(4))s  $($Process.GetOwner().User)  $suffix"
+              try {
+                $Owner = $Process.GetOwner().User
+              } catch {
+                $Owner = "<Unknown>"
+              }
+              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) P$($Process.Priority.ToString().PadRight(1)) $($Process.HandleCount.ToString().PadLeft(5)) handles; $([math]::Round($Process.WorkingSetSize/1048576., 1).ToString().PadLeft(5)) Mib RSS; $([math]::Round($Process.UserModeTime/10000000., 1).ToString().PadLeft(4))s  $Owner  $suffix"
               $Children = $AllProcesses | Where-Object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
               if ($null -ne $Children) {
                   foreach ($Child in ($Children | Sort-Object -Property ProcessId)) {
