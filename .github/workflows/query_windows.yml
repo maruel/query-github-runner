@@ -59,9 +59,15 @@ jobs:
         run: Get-CimInstance Win32_StartupCommand
       - name: Print-ProcessTree
         shell: powershell
-        run: |
+        run: |a
+          $Services = Get-CimInstance -Class Win32_Service
           function Get-ProcessAndChildProcesses($Level, $Process) {
-              Write-Host "$('  ' * $Level)$($Process.ProcessId.ToString().PadLeft(5, ' ')) $($Process.Name)  $($Process.HandleCount) handles; $($Process.WorkingSetSize/1024)KiB RSS"
+              $svc = $Services | Where-Object -Property ProcessID -EQ $Process.ProcessId | Select-Object -ExpandProperty Name
+              $suffix = ""
+              if ($svc) {
+                $suffix = "  (" + [string]::Join(", ", $svc) + ")"
+              }
+              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) $($Process.HandleCount.ToString().PadLeft(6)) handles; $(($Process.WorkingSetSize/1024).ToString().PadLeft(6)) kib RSS;  $($Process.Name)$suffix"
               $Children = $AllProcesses | Where-Object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
               if ($null -ne $Children) {
                   foreach ($Child in ($Children | Sort-Object -Property ProcessId)) {
