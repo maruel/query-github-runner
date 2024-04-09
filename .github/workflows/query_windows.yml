@@ -59,7 +59,7 @@ jobs:
         run: Get-CimInstance Win32_StartupCommand
       - name: Print-ProcessTree
         shell: powershell
-        run: |a
+        run: |
           $Services = Get-CimInstance -Class Win32_Service
           function Get-ProcessAndChildProcesses($Level, $Process) {
               $svc = $Services | Where-Object -Property ProcessID -EQ $Process.ProcessId | Select-Object -ExpandProperty Name
