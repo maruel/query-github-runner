@@ -36,6 +36,8 @@ jobs:
         run: qwinsta
       - name: cmd /v
         run: cmd /v
+      - name: reg query "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
+        run: reg query "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
       - name: dir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
         run: dir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
       - name: dir "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup"
