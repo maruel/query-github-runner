@@ -12,6 +12,27 @@ jobs:
     name: Query GitHub runner
     runs-on: windows-latest
     steps:
+      - name: Get-PhysicalDisk
+        shell: powershell
+        run: Get-PhysicalDisk
+      - name: Get-Disk
+        shell: powershell
+        run: Get-Disk
+      - name: Get-Partition
+        shell: powershell
+        run: Get-Partition
+      - name: Get-MMAgent
+        shell: powershell
+        run: Get-MMAgent
+      - name: Get-NetIPConfiguration
+        shell: powershell
+        run: Get-NetIPConfiguration
+      - name: Get-CimInstance -ClassName Win32_Processor
+        shell: powershell
+        run: Get-CimInstance -ClassName Win32_Processor
+      - name: Get-CimInstance -ClassName Win32_PhysicalMemory
+        shell: powershell
+        run: Get-CimInstance -ClassName Win32_PhysicalMemory
       - name: dir /a
         run: dir /a
       - name: dir /a c:\
