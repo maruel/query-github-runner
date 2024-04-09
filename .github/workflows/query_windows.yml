@@ -22,8 +22,8 @@ jobs:
         run: dir /a c:\users
       - name: dir /a c:\runners
         run: dir /a c:\runners
-      - name: "for %%f in (c:\runners\*) do dir /a %%f"
-        run: for %%f in (c:\runners\*) do dir /a %%f
+      - name: "for %%f in (c:\\runners\\*) do dir /a %%f"
+        run: "for %%f in (c:\\runners\\*) do dir /a %%f"
       - name: set
         run: set
       - name: tasklist /v
