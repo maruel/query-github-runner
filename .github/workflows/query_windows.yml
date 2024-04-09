@@ -60,7 +60,7 @@ jobs:
       - name: Print-ProcessTree
         shell: powershell
         run: |
-          $Services = Get-CimInstance -Class Win32_Service
+          $Services = Get-CimInstance -ClassName Win32_Service
           function Get-ProcessAndChildProcesses($Level, $Process) {
               # https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process
               # P4 = Idle; P8 = Normal; P13 = High
@@ -72,7 +72,7 @@ jobs:
               if ($svc) {
                 $suffix += "  (" + [string]::Join(", ", $svc) + ")"
               }
-              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) P$($Process.Priority.ToString().PadRight(1)) $($Process.HandleCount.ToString().PadLeft(6)) handles; $([math]::Round($Process.WorkingSetSize/1048576., 1).ToString().PadLeft(6)) Mib RSS;  $suffix"
+              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) P$($Process.Priority.ToString().PadRight(1)) $($Process.HandleCount.ToString().PadLeft(5)) handles; $([math]::Round($Process.WorkingSetSize/1048576., 1).ToString().PadLeft(5)) Mib RSS;  $($Process.GetOwner().User)  $([math]::Round($Process.UserModeTime/10000000., 1).ToString().PadLeft(6))s  $suffix"
               $Children = $AllProcesses | Where-Object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
               if ($null -ne $Children) {
                   foreach ($Child in ($Children | Sort-Object -Property ProcessId)) {
@@ -80,7 +80,8 @@ jobs:
                   }
               }
           }
-          $AllProcesses = Get-CimInstance -ClassName "Win32_Process"
+          # We cannot retrieve the process owner with Get-CimInstance.
+          $AllProcesses = Get-WmiObject -ClassName Win32_Process -EnableAllPrivileges
           $RootProcesses = @()
           # Skip "System Idle Process", the first item, as ProcessId and ParentProcessId are 0.
           foreach ($Process in $AllProcesses[1..($AllProcesses.length-1)]) {
