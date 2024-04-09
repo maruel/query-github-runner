@@ -59,30 +59,26 @@ jobs:
         run: Get-CimInstance Win32_StartupCommand
       - name: Print-ProcessTree
         shell: powershell
-        # Copy-pasted from SO.
         run: |
           function Get-ProcessAndChildProcesses($Level, $Process) {
-              "{0}[{1,-5}] [{2}]" -f ("  " * $Level), $Process.ProcessId, $Process.Name
-              $Children = $AllProcesses | where-object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
+              Write-Host "$('  ' * $Level)$($Process.ProcessId.ToString().PadLeft(5, ' ')) $($Process.Name)  $($Process.HandleCount) handles; $($Process.WorkingSetSize/1024)KiB RSS"
+              $Children = $AllProcesses | Where-Object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
               if ($null -ne $Children) {
-                  foreach ($Child in $Children) {
+                  foreach ($Child in ($Children | Sort-Object -Property ProcessId)) {
                       Get-ProcessAndChildProcesses ($Level + 1) $Child
                   }
               }
           }
-          $AllProcesses = Get-CimInstance -ClassName "win32_process"
+          $AllProcesses = Get-CimInstance -ClassName "Win32_Process"
           $RootProcesses = @()
-          # Process "System Idle Process" is processed differently, as ProcessId and ParentProcessId are 0
-          # $AllProcesses is sliced from index 1 to the end of the array
+          # Skip "System Idle Process", the first item, as ProcessId and ParentProcessId are 0.
           foreach ($Process in $AllProcesses[1..($AllProcesses.length-1)]) {
-              $Parent = $AllProcesses | where-object {$_.ProcessId -eq $Process.ParentProcessId -and $_.CreationDate -lt $Process.CreationDate}
+              $Parent = $AllProcesses | Where-Object {$_.ProcessId -eq $Process.ParentProcessId -and $_.CreationDate -lt $Process.CreationDate}
               if ($null -eq $Parent) {
                   $RootProcesses += $Process
               }
           }
-          # Process the "System Idle process" separately
-          "[{0,-5}] [{1}]" -f $AllProcesses[0].ProcessId, $AllProcesses[0].Name
-          foreach ($Process in $RootProcesses) {
+          foreach ($Process in ($RootProcesses | Sort-Object -Property ProcessId)) {
               Get-ProcessAndChildProcesses 0 $Process
           }
       - name: Get-ScheduledTask
