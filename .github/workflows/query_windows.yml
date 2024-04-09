@@ -62,12 +62,17 @@ jobs:
         run: |
           $Services = Get-CimInstance -Class Win32_Service
           function Get-ProcessAndChildProcesses($Level, $Process) {
+              # https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process
+              # P4 = Idle; P8 = Normal; P13 = High
               $svc = $Services | Where-Object -Property ProcessID -EQ $Process.ProcessId | Select-Object -ExpandProperty Name
-              $suffix = ""
-              if ($svc) {
-                $suffix = "  (" + [string]::Join(", ", $svc) + ")"
+              $suffix = $Process.ExecutablePath
+              if (!$suffix) {
+                $suffix = $Process.Name
               }
-              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) $($Process.HandleCount.ToString().PadLeft(6)) handles; $(($Process.WorkingSetSize/1024).ToString().PadLeft(6)) kib RSS;  $($Process.Name)$suffix"
+              if ($svc) {
+                $suffix += "  (" + [string]::Join(", ", $svc) + ")"
+              }
+              Write-Host "$('  ' * $Level)- $($Process.ProcessId.ToString().PadRight(6)) P$($Process.Priority.ToString().PadRight(1)) $($Process.HandleCount.ToString().PadLeft(6)) handles; $([math]::Round($Process.WorkingSetSize/1048576., 1).ToString().PadLeft(6)) Mib RSS;  $suffix"
               $Children = $AllProcesses | Where-Object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
               if ($null -ne $Children) {
                   foreach ($Child in ($Children | Sort-Object -Property ProcessId)) {
