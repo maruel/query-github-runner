@@ -1,0 +1,89 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+defaults:
+  run:
+    shell: cmd
+
+jobs:
+  query:
+    name: Query GitHub runner
+    runs-on: windows-latest
+    steps:
+      - name: dir /a
+        run: dir /a
+      - name: dir /a c:\
+        run: dir /a c:\
+      - name: dir /a %USERPROFILE%
+        run: dir /a %USERPROFILE%
+      - name: dir /a c:\users
+        run: dir /a c:\users
+      - name: set
+        run: set
+      - name: tasklist /v
+        run: tasklist /v
+      - name: tasklist /svc
+        run: tasklist /svc
+      - name: tasklist /apps
+        run: tasklist /apps
+      - name: qwinsta
+        run: qwinsta
+      - name: cmd /v
+        run: cmd /v
+      - name: dir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+        run: dir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+      - name: dir "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup"
+        run: dir "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup"
+      - name: reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+        run: reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+      - name: reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
+        run: reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
+      - name: reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+        run: reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+      - name: reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
+        run: |
+          reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
+          exit 0
+      - name: wmic startup get caption, command
+        run: wmic startup get caption, command
+      - name: Get-CimInstance Win32_StartupCommand
+        shell: powershell
+        run: Get-CimInstance Win32_StartupCommand
+      - name: Print-ProcessTree
+        shell: powershell
+        # Copy-pasted from SO.
+        run: |
+          function Get-ProcessAndChildProcesses($Level, $Process) {
+              "{0}[{1,-5}] [{2}]" -f ("  " * $Level), $Process.ProcessId, $Process.Name
+              $Children = $AllProcesses | where-object {$_.ParentProcessId -eq $Process.ProcessId -and $_.CreationDate -ge $Process.CreationDate}
+              if ($null -ne $Children) {
+                  foreach ($Child in $Children) {
+                      Get-ProcessAndChildProcesses ($Level + 1) $Child
+                  }
+              }
+          }
+          $AllProcesses = Get-CimInstance -ClassName "win32_process"
+          $RootProcesses = @()
+          # Process "System Idle Process" is processed differently, as ProcessId and ParentProcessId are 0
+          # $AllProcesses is sliced from index 1 to the end of the array
+          foreach ($Process in $AllProcesses[1..($AllProcesses.length-1)]) {
+              $Parent = $AllProcesses | where-object {$_.ProcessId -eq $Process.ParentProcessId -and $_.CreationDate -lt $Process.CreationDate}
+              if ($null -eq $Parent) {
+                  $RootProcesses += $Process
+              }
+          }
+          # Process the "System Idle process" separately
+          "[{0,-5}] [{1}]" -f $AllProcesses[0].ProcessId, $AllProcesses[0].Name
+          foreach ($Process in $RootProcesses) {
+              Get-ProcessAndChildProcesses 0 $Process
+          }
+      - name: Get-ScheduledTask
+        shell: powershell
+        run: Get-ScheduledTask
+      - name: Get-ScheduledTask -TaskName RunnerMachineProvisioner | Export-ScheduledTask
+        shell: powershell
+        run: Get-ScheduledTask -TaskName RunnerMachineProvisioner | Export-ScheduledTask
+      - name: dir /a C:\actions\runner-provisioner-Windows
+        run: dir /a C:\actions\runner-provisioner-Windows
