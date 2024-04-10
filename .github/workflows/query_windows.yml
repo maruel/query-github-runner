@@ -44,6 +44,8 @@ jobs:
         run: dir /a
       - name: dir /a c:\
         run: dir /a c:\
+      - name: dir /a d:\
+        run: dir /a d:\
       - name: "Get-LocalUser | Where-Object -Property Enabled -eq $true | Format-List"
         shell: powershell
         run: "Get-LocalUser | Where-Object -Property Enabled -eq $true | Format-List"
@@ -53,8 +55,6 @@ jobs:
         run: dir /a c:\users
       - name: dir /a c:\runners
         run: dir /a c:\runners
-      - name: "for %%f in (c:\\runners\\*) do dir /a %%f"
-        run: "for %%f in (c:\\runners\\*) do dir /a %%f"
       - name: set
         run: set
       - name: tasklist /v

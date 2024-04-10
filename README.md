@@ -20,6 +20,28 @@ I wonder what these two notifications are.
 
 ![screenshot.png](screenshot.png)
 
+## Invoke-RestMethod http://169.254.169.254/...
+
+Data as of 2024-04-10.
+
+Frankly I was expecting the metadata server to be cloaked. It was not the case.
+
+- VM size is Standard_D4ads_v5.
+    - 2 Cores (HyperThreaded), AMD 3rd Gen EPYC 7763v, 16GiB of RAM.
+    - https://learn.microsoft.com/en-us/azure/virtual-machines/dv5-dsv5-series
+    - https://cloudprice.net/vm/Standard_D4ads_v5
+    - Located in the [westus
+      region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions=us-west%2cnon-regional&products=all),
+      with a list price of 0.428$USD/h.
+- Disk uses Premium_LRS.
+    - While the disk is encrypted (does this only mean bitlocker?), secureboot is not enabled nor virtual TPM.
+    - 256GiB on [P15 performance
+      tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits).
+    - Local 150GiB unencrypted temporary local SSD mounted as `D:\`.
+- SKU is not set. This is a custom image.
+- GitHub's corp subscription is bd1c5232-854f-4487-b341-930c8ec8497b.
+
+
 ## Get-Disk
 
 While this is not called out here, the second disk is significantly faster.
@@ -49,6 +71,7 @@ HKLM                                   Registry      HKEY_LOCAL_MACHINE
 Variable                               Variable
 WSMan                                  WSMan
 ```
+
 
 ## Get-CimInstance -ClassName Win32_Processor | Format-List -Property *
 
@@ -116,6 +139,7 @@ CimInstanceProperties                   : {Caption, Description, InstallDate, Na
 CimSystemProperties                     : Microsoft.Management.Infrastructure.CimSystemProperties
 ```
 
+
 ## Get-CimInstance -ClassName Win32_PhysicalMemory
 
 This one is weird.
@@ -158,6 +182,7 @@ SMBIOSMemoryType    : 1
 TypeDetail          : 4
 ```
 
+
 ## Get-CimInstance Win32_StartupCommand
 
 ```
@@ -168,9 +193,11 @@ C:\PROGRA~1\MICROS~4\SERVIC~1\Tools\SERVIC~2\SERVIC~1.EXE  Public Service Fabric
 %windir%\AzureArcSetup\Systray\AzureArcSysTray.exe         Public AzureArcSetup
 ```
 
+
 # Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
 
-Why the heck Epic Games Launcher is installed? Who knows!
+Why the heck Epic Games Launcher is installed? I hear it's because of Visual
+Studio.
 
 ```
 Name                                                                          Version
