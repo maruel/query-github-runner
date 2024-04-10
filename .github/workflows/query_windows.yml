@@ -12,6 +12,9 @@ jobs:
     name: Query GitHub runner
     runs-on: windows-latest
     steps:
+      - name: Invoke-RestMethod http://169.254.169.254/...
+        shell: powershell
+        run: Invoke-RestMethod -Headers @{"Metadata"="true"} -Method GET -Uri "http://169.254.169.254/metadata?api-version=2021-12-13"
       - name: Get-PSDrive
         shell: powershell
         run: Get-PSDrive

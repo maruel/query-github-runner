@@ -10,7 +10,7 @@ base image, it doesn't contain the sources of
 
 See recent actions at
 https://github.com/maruel/query-github-runner/actions/workflows/query_windows.yml
-to see the output of the workflow.
+to see the output of all the things queried in the workflow.
 
 Here's a few interesting bits:
 
@@ -50,15 +50,70 @@ Variable                               Variable
 WSMan                                  WSMan
 ```
 
-## Get-CimInstance -ClassName Win32_Processor
+## Get-CimInstance -ClassName Win32_Processor | Format-List -Property *
 
 ```
-Caption           : AMD64 Family 25 Model 1 Stepping 1
-DeviceID          : CPU0
-Manufacturer      : AuthenticAMD
-MaxClockSpeed     : 2445
-Name              : AMD EPYC 7763 64-Core Processor
-SocketDesignation : None
+Availability                            : 3
+CpuStatus                               : 1
+CurrentVoltage                          : 11
+DeviceID                                : CPU0
+ErrorCleared                            :
+ErrorDescription                        :
+LastErrorCode                           :
+LoadPercentage                          : 2
+Status                                  : OK
+StatusInfo                              : 3
+AddressWidth                            : 64
+DataWidth                               : 64
+ExtClock                                : 100
+L2CacheSize                             :
+L2CacheSpeed                            :
+MaxClockSpeed                           : 2445
+PowerManagementSupported                : False
+ProcessorType                           : 3
+Revision                                : 257
+SocketDesignation                       : None
+Version                                 : Model 1, Stepping 1
+VoltageCaps                             :
+Caption                                 : AMD64 Family 25 Model 1 Stepping 1
+Description                             : AMD64 Family 25 Model 1 Stepping 1
+InstallDate                             :
+Name                                    : AMD EPYC 7763 64-Core Processor
+ConfigManagerErrorCode                  :
+ConfigManagerUserConfig                 :
+CreationClassName                       : Win32_Processor
+PNPDeviceID                             :
+PowerManagementCapabilities             :
+SystemCreationClassName                 : Win32_ComputerSystem
+SystemName                              : fv-az980-697
+CurrentClockSpeed                       : 2445
+Family                                  : 107
+OtherFamilyDescription                  :
+Role                                    : CPU
+Stepping                                : 1
+UniqueId                                :
+UpgradeMethod                           : 6
+Architecture                            : 9
+AssetTag                                : None
+Characteristics                         :
+L3CacheSize                             : 0
+L3CacheSpeed                            : 0
+Level                                   : 25
+Manufacturer                            : AuthenticAMD
+NumberOfCores                           : 2
+NumberOfEnabledCore                     :
+NumberOfLogicalProcessors               : 4
+PartNumber                              : None
+ProcessorId                             : 178BFBFF00A00F11
+SecondLevelAddressTranslationExtensions : False
+SerialNumber                            : None
+ThreadCount                             :
+VirtualizationFirmwareEnabled           : True
+VMMonitorModeExtensions                 : False
+PSComputerName                          :
+CimClass                                : root/cimv2:Win32_Processor
+CimInstanceProperties                   : {Caption, Description, InstallDate, Name...}
+CimSystemProperties                     : Microsoft.Management.Infrastructure.CimSystemProperties
 ```
 
 ## Get-CimInstance -ClassName Win32_PhysicalMemory
@@ -795,3 +850,9 @@ WPTx64 (DesktopEditions)                                                      10
 WPTx64 (OnecoreUAP)                                                           10.1.22621.3233
 Xamarin Remoted iOS Simulator                                                 17.6.0.524
 ```
+
+## .. and more!
+
+This is just an highlight. See recent actions at
+https://github.com/maruel/query-github-runner/actions/workflows/query_windows.yml
+to see the output of all the things queried in the workflow.
