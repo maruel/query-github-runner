@@ -67,6 +67,9 @@ jobs:
         run: tasklist /apps
       - name: qwinsta
         run: qwinsta
+      - name: Get-WmiObject Win32_VideoController
+        shell: powershell
+        run: Get-WmiObject Win32_VideoController
       - name: cmd /v
         run: cmd /v
       - name: reg query "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"

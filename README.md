@@ -35,11 +35,13 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
     - Located in the [westus
       region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions=us-west%2cnon-regional&products=all),
       with a list price of 0.428$USD/h.
-- Disk is Premium_LRS.
-    - 256GiB on [P15 performance
+    - Secureboot nor Virtual TPM are not enabled.
+- Disk
+    - OS disk is Premium_LRS, 256GiB on [P15 performance
       tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits).
-    - While the disk is encrypted (does this only mean bitlocker?), secureboot is not enabled nor virtual TPM.
-    - Local 150GiB unencrypted temporary local SSD mounted as `D:\`.
+    - The disk is encrypted (does this only mean bitlocker?).
+    - Local 150GiB unencrypted temporary local SSD mounted as `D:\` with
+      19000IOPS / 250 MBps.
     - `pagefile.sys` is on `D:\`.
     - The GitHub Actions work directory is `D:\a`, thus on the high speed local unencrypted
       SSD.
