@@ -200,6 +200,7 @@ icecap_collectionresources                                                    17
 icecap_collectionresourcesx64                                                 17.9.34714
 IIS 10.0 Express                                                              10.0.08608
 IntelliTraceProfilerProxy                                                     15.0.21225.01
+IntelliTraceProfilerProxy                                                     15.0.21225.01
 Kits Configuration Installer                                                  10.1.22621.2428
 Microsoft .NET 8.0 Templates 8.0.202 (x64)                                    32.7.52897
 Microsoft .NET AppHost Pack - 8.0.3 (x64)                                     64.12.10343
@@ -551,8 +552,12 @@ Universal General MIDI DLS Extension SDK                                      10
 Universal General MIDI DLS Extension SDK                                      10.1.22621.3233
 vcpp_crt.redist.clickonce                                                     14.38.33135
 Visual C++ Library CRT Appx Package                                           14.39.33519
+Visual C++ Library CRT Appx Package                                           14.39.33519
 Visual C++ Library CRT Appx Resource Package                                  14.39.33519
 Visual C++ Library CRT ARM64 Appx Package                                     14.39.33519
+Visual C++ Library CRT ARM64 Appx Package                                     14.39.33519
+Visual C++ Library CRT Desktop Appx Package                                   14.39.33519
+Visual C++ Library CRT Desktop Appx Package                                   14.39.33519
 Visual C++ Library CRT Desktop Appx Package                                   14.39.33519
 VS Immersive Activate Helper                                                  17.0.125.0
 VS JIT Debugger                                                               17.0.125.0
