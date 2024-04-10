@@ -49,6 +49,8 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
       edition in [Test
       Mode](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option).
         - This means any self-signed kernel driver can be loaded!
+        - The only listed kernel driver providers are Microsoft and Mellanox
+          Technologies.
     - Neither Secureboot nor Virtual TPM are enabled.
     - The OS disk is encrypted. Does this only mean BitLocker? Official
       documentation is not clear.
