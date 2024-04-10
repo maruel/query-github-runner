@@ -40,6 +40,9 @@ jobs:
               $obj = $_
               $obj | Select-Object -Property ($obj.psobject.properties.Name.Where({-not $PSItem.StartsWith("Cim") -and $obj.$PSItem -ne $null -and -not [string]::IsNullOrEmpty($obj.$PSItem)}))
           }
+      - name: Get-WmiObject Win32_VideoController
+        shell: powershell
+        run: Get-WmiObject Win32_VideoController
       - name: dir /a
         run: dir /a
       - name: dir /a c:\
@@ -67,9 +70,6 @@ jobs:
         run: tasklist /apps
       - name: qwinsta
         run: qwinsta
-      - name: Get-WmiObject Win32_VideoController
-        shell: powershell
-        run: Get-WmiObject Win32_VideoController
       - name: cmd /v
         run: cmd /v
       - name: reg query "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"

@@ -29,7 +29,9 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
 - VM size is Standard_D4ads_v5.
     - 2 Cores (HyperThreaded), [AMD 3rd Gen EPYC
       7763v](https://www.amd.com/en/products/cpu/amd-epyc-7763), 16GiB of RAM at
-      3200MT/s.
+      3200MT/s. Napkin table calculation: 204.8GB/s of total bandwidth over 8
+      memory channels shared over (64/2) VMs = 6.4GB/s of memory bandwidth per
+      VM.
     - https://learn.microsoft.com/en-us/azure/virtual-machines/dasv5-dadsv5-series
     - https://cloudprice.net/vm/Standard_D4ads_v5
     - Located in the [westus
