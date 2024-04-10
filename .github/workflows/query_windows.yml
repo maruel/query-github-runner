@@ -46,6 +46,8 @@ jobs:
         run: dir /a c:\
       - name: dir /a d:\
         run: dir /a d:\
+      - name: dir /a d:\a
+        run: dir /a d:\a
       - name: "Get-LocalUser | Where-Object -Property Enabled -eq $true | Format-List"
         shell: powershell
         run: "Get-LocalUser | Where-Object -Property Enabled -eq $true | Format-List"

@@ -27,17 +27,22 @@ Data as of 2024-04-10.
 Frankly I was expecting the metadata server to be cloaked. It was not the case.
 
 - VM size is Standard_D4ads_v5.
-    - 2 Cores (HyperThreaded), AMD 3rd Gen EPYC 7763v, 16GiB of RAM.
-    - https://learn.microsoft.com/en-us/azure/virtual-machines/dv5-dsv5-series
+    - 2 Cores (HyperThreaded), [AMD 3rd Gen EPYC
+      7763v](https://www.amd.com/en/products/cpu/amd-epyc-7763), 16GiB of RAM at
+      3200MT/s.
+    - https://learn.microsoft.com/en-us/azure/virtual-machines/dasv5-dadsv5-series
     - https://cloudprice.net/vm/Standard_D4ads_v5
     - Located in the [westus
       region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions=us-west%2cnon-regional&products=all),
       with a list price of 0.428$USD/h.
-- Disk uses Premium_LRS.
-    - While the disk is encrypted (does this only mean bitlocker?), secureboot is not enabled nor virtual TPM.
+- Disk is Premium_LRS.
     - 256GiB on [P15 performance
       tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits).
+    - While the disk is encrypted (does this only mean bitlocker?), secureboot is not enabled nor virtual TPM.
     - Local 150GiB unencrypted temporary local SSD mounted as `D:\`.
+    - `pagefile.sys` is on `D:\`.
+    - The GitHub Actions work directory is `D:\a`, thus on the high speed local unencrypted
+      SSD.
 - SKU is not set. This is a custom image.
 - GitHub's corp subscription is bd1c5232-854f-4487-b341-930c8ec8497b.
 
