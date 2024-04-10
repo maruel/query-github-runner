@@ -14,17 +14,13 @@ to see the output of all the things queried in the workflow.
 
 Here's a few interesting bits:
 
-## Take screenshot
+## Screenshot
 
 I wonder what these two notifications are.
 
 ![screenshot.png](screenshot.png)
 
-## Invoke-RestMethod http://169.254.169.254/...
-
-Data as of 2024-04-10.
-
-Frankly I was expecting the metadata server to be cloaked. It was not the case.
+## TL;DR
 
 - VM size is Standard_D4ads_v5 on Azure.
     - 2 Cores (HyperThreaded), [AMD 3rd Gen EPYC
@@ -42,7 +38,14 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
       tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits)
       1100 IOPS / 125 MBps.
     - `D:\` is 150GiB temporary local SSD mounted as with 19000 IOPS / 250 MBps.
+      This is much more than the [advertised
+      size of 14GB](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories)
     - `pagefile.sys` is on `D:\`.
+- Emulated display is set to 1024x768.
+- The GitHub image auto logins using AutoLogonSID +
+  `HKLM\SECURITY\Policy\Secrets\DefaultPassword`.
+- GitHub starts the runner as a Scheduled Task running at logon. This is
+  important for application testing.
 - Security
     - Windows Server 2022
       [Datacenter](https://www.microsoft.com/en-us/windows-server/pricing)
