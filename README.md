@@ -26,7 +26,7 @@ Data as of 2024-04-10.
 
 Frankly I was expecting the metadata server to be cloaked. It was not the case.
 
-- VM size is Standard_D4ads_v5.
+- VM size is Standard_D4ads_v5 on Azure.
     - 2 Cores (HyperThreaded), [AMD 3rd Gen EPYC
       7763v](https://www.amd.com/en/products/cpu/amd-epyc-7763), 16GiB of RAM at
       3200MT/s.
