@@ -18,9 +18,9 @@ jobs:
       - name: Get-Disk
         shell: powershell
         run: Get-Disk
-      - name: Get-Partition
+      - name: Get-Partition | Format-List
         shell: powershell
-        run: Get-Partition
+        run: Get-Partition | Format-List
       - name: Get-MMAgent
         shell: powershell
         run: Get-MMAgent
@@ -136,9 +136,6 @@ jobs:
         run: dir /a c:\actions\runner-provisioner-Windows
       - name: dir /a c:\actions\settings
         run: dir /a c:\actions\settings
-      - name: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
-        shell: powershell
-        run: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
       - name: Take screenshot
         shell: powershell
         run: |
@@ -162,3 +159,9 @@ jobs:
           path: screenshot.png
           compression-level: 0
           retention-days: 2
+      - name: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name,Version
+        shell: powershell
+        # Sadly this step is extremely slow because there's a ton of
+        # preinstalled software. It takes over 10 minutes (!!) on the hosted
+        # runner image. This is why it is the last step.
+        run: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name,Version
