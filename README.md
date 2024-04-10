@@ -29,29 +29,33 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
 - VM size is Standard_D4ads_v5.
     - 2 Cores (HyperThreaded), [AMD 3rd Gen EPYC
       7763v](https://www.amd.com/en/products/cpu/amd-epyc-7763), 16GiB of RAM at
-      3200MT/s. Napkin table calculation: 204.8GB/s of total bandwidth over 8
-      memory channels shared over (64/2) VMs = 6.4GB/s of memory bandwidth per
-      VM.
+      3200MT/s.
+        - Napkin table calculation: 204.8GB/s of total bandwidth over 8 memory
+          channels shared over (64/2) VMs = 6.4GB/s of memory bandwidth per VM.
     - https://learn.microsoft.com/en-us/azure/virtual-machines/dasv5-dadsv5-series
     - https://cloudprice.net/vm/Standard_D4ads_v5
     - Located in the [westus
       region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions=us-west%2cnon-regional&products=all),
       with a list price of 0.428$USD/h.
+- Disk
+    - OS disk is Premium_LRS, 256GiB on [P15 performance
+      tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits).
+    - Local 150GiB temporary local SSD mounted as `D:\` with 19000IOPS / 250
+      MBps.
+    - `pagefile.sys` is on `D:\`.
+- Security
     - Windows Server 2022
       [Datacenter](https://www.microsoft.com/en-us/windows-server/pricing)
       edition in [Test
       Mode](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option).
-      This means any self-signed kernel driver can be loaded!
-    - Secureboot nor Virtual TPM are not enabled.
-- Disk
-    - OS disk is Premium_LRS, 256GiB on [P15 performance
-      tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits).
-    - The disk is encrypted (does this only mean bitlocker?).
-    - Local 150GiB unencrypted temporary local SSD mounted as `D:\` with
-      19000IOPS / 250 MBps.
-    - `pagefile.sys` is on `D:\`.
+        - This means any self-signed kernel driver can be loaded!
+    - Neither Secureboot nor Virtual TPM are enabled.
+    - The OS disk is encrypted. Does this only mean BitLocker? Official
+      documentation is not clear.
     - The GitHub Actions work directory is `D:\a`, thus on the high speed local unencrypted
       SSD.
+    - Data Execution Prevention is in OptOut mode, thus enabled for all programs
+      except those explicitly listed.
 - SKU is not set. This is a custom image.
 - GitHub's corp subscription is bd1c5232-854f-4487-b341-930c8ec8497b.
 
