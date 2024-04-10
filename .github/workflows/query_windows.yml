@@ -27,12 +27,16 @@ jobs:
       - name: Get-NetIPConfiguration
         shell: powershell
         run: Get-NetIPConfiguration
-      - name: Get-CimInstance -ClassName Win32_Processor
+      - name: Get-CimInstance -ClassName Win32_Processor | Format-List
         shell: powershell
-        run: Get-CimInstance -ClassName Win32_Processor
+        run: Get-CimInstance -ClassName Win32_Processor | Format-List
       - name: Get-CimInstance -ClassName Win32_PhysicalMemory
         shell: powershell
-        run: Get-CimInstance -ClassName Win32_PhysicalMemory
+        run: |
+          Get-CimInstance -ClassName Win32_PhysicalMemory | ForEach-Object {
+              $obj = $_
+              $obj | Select-Object -Property ($obj.psobject.properties.Name.Where({-not $PSItem.StartsWith("Cim") -and $obj.$PSItem -ne $null -and -not [string]::IsNullOrEmpty($obj.$PSItem)}))
+          }
       - name: dir /a
         run: dir /a
       - name: dir /a c:\
@@ -132,6 +136,9 @@ jobs:
         run: dir /a c:\actions\runner-provisioner-Windows
       - name: dir /a c:\actions\settings
         run: dir /a c:\actions\settings
+      - name: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
+        shell: powershell
+        run: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
       - name: Take screenshot
         shell: powershell
         run: |
