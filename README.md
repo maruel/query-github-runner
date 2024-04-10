@@ -37,6 +37,11 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
     - Located in the [westus
       region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions=us-west%2cnon-regional&products=all),
       with a list price of 0.428$USD/h.
+    - Windows Server 2022
+      [Datacenter](https://www.microsoft.com/en-us/windows-server/pricing)
+      edition in [Test
+      Mode](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option).
+      This means any self-signed kernel driver can be loaded!
     - Secureboot nor Virtual TPM are not enabled.
 - Disk
     - OS disk is Premium_LRS, 256GiB on [P15 performance

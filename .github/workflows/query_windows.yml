@@ -43,6 +43,8 @@ jobs:
       - name: Get-WmiObject Win32_VideoController
         shell: powershell
         run: Get-WmiObject Win32_VideoController
+      - name: bcdedit
+        run: bededit
       - name: dir /a
         run: dir /a
       - name: dir /a c:\
