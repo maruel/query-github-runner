@@ -15,6 +15,9 @@ jobs:
       - name: Get-PhysicalDisk
         shell: powershell
         run: Get-PhysicalDisk
+      - name: Get-PSDrive
+        shell: powershell
+        run: Get-PSDrive
       - name: Get-Disk
         shell: powershell
         run: Get-Disk

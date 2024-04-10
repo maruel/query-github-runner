@@ -16,6 +16,8 @@ Here's a few interesting bits:
 
 ## Take screenshot
 
+I wonder what these two notifications are.
+
 ![screenshot.png](screenshot.png)
 
 ## Get-Disk
