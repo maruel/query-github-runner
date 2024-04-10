@@ -43,6 +43,9 @@ jobs:
       - name: Get-WmiObject Win32_VideoController
         shell: powershell
         run: Get-WmiObject Win32_VideoController
+      - name: Get-CimInstance -ClassName Win32_OperatingSystem | Format-List -Property *
+        shell: powershell
+        run: Get-CimInstance -ClassName Win32_OperatingSystem | Format-List -Property *
       - name: bcdedit
         run: bcdedit
       - name: dir /a
