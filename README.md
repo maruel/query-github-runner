@@ -32,77 +32,22 @@ Number Friendly Name Serial Number                    HealthStatus         Opera
 1      Virtual HD                                     Healthy              Online                     150 GB MBR
 ```
 
-## Get-Partition | Format-List
+## Get-PSDrive
 
 ```
-UniqueId             : {00000000-0000-0000-0000-100000000000}IDE\DISKVIRTUAL_HD______________________________1.1.0___\5
-                       &35DC7040&0&0.0.0:fv-az1388-938
-AccessPaths          : {\\?\Volume{4de80355-0000-0000-0000-100000000000}\}
-DiskNumber           : 0
-DiskPath             : \\?\ide#diskvirtual_hd______________________________1.1.0___#5&35dc7040&0&0.0.0#{53f56307-b6bf-1
-                       1d0-94f2-00a0c91efb8b}
-DriveLetter          :
-Guid                 :
-IsActive             : True
-IsBoot               : False
-IsHidden             : False
-IsOffline            : False
-IsReadOnly           : False
-IsShadowCopy         : False
-IsDAX                : False
-IsSystem             : True
-NoDefaultDriveLetter : False
-Offset               : 1048576
-OperationalStatus    : Online
-PartitionNumber      : 1
-Size                 : 500 MB
-Type                 : IFS
-
-UniqueId             : {00000000-0000-0000-0000-501f00000000}IDE\DISKVIRTUAL_HD______________________________1.1.0___\5
-                       &35DC7040&0&0.0.0:fv-az1388-938
-AccessPaths          : {C:\, \\?\Volume{4de80355-0000-0000-0000-501f00000000}\}
-DiskNumber           : 0
-DiskPath             : \\?\ide#diskvirtual_hd______________________________1.1.0___#5&35dc7040&0&0.0.0#{53f56307-b6bf-1
-                       1d0-94f2-00a0c91efb8b}
-DriveLetter          : C
-Guid                 :
-IsActive             : False
-IsBoot               : True
-IsHidden             : False
-IsOffline            : False
-IsReadOnly           : False
-IsShadowCopy         : False
-IsDAX                : False
-IsSystem             : False
-NoDefaultDriveLetter : False
-Offset               : 525336576
-OperationalStatus    : Online
-PartitionNumber      : 2
-Size                 : 255.51 GB
-Type                 : IFS
-
-UniqueId             : {00000000-0000-0000-0000-100000000000}IDE\DISKVIRTUAL_HD______________________________1.1.0___\5
-                       &35DC7040&0&0.1.0:fv-az1388-938
-AccessPaths          : {D:\, \\?\Volume{2a8cf27d-0000-0000-0000-100000000000}\}
-DiskNumber           : 1
-DiskPath             : \\?\ide#diskvirtual_hd______________________________1.1.0___#5&35dc7040&0&0.1.0#{53f56307-b6bf-1
-                       1d0-94f2-00a0c91efb8b}
-DriveLetter          : D
-Guid                 :
-IsActive             : False
-IsBoot               : False
-IsHidden             : False
-IsOffline            : False
-IsReadOnly           : False
-IsShadowCopy         : False
-IsDAX                : False
-IsSystem             : False
-NoDefaultDriveLetter : False
-Offset               : 1048576
-OperationalStatus    : Online
-PartitionNumber      : 1
-Size                 : 150 GB
-Type                 : IFS
+Name           Used (GB)     Free (GB) Provider      Root                                               CurrentLocation
+----           ---------     --------- --------      ----                                               ---------------
+A                                      FileSystem    A:\
+Alias                                  Alias
+C                 184.13         71.38 FileSystem    C:\
+Cert                                   Certificate   \
+D                   2.98        147.02 FileSystem    D:\                                 ...-runner\query-github-runner
+Env                                    Environment
+Function                               Function
+HKCU                                   Registry      HKEY_CURRENT_USER
+HKLM                                   Registry      HKEY_LOCAL_MACHINE
+Variable                               Variable
+WSMan                                  WSMan
 ```
 
 ## Get-CimInstance -ClassName Win32_Processor

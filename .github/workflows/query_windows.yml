@@ -12,9 +12,6 @@ jobs:
     name: Query GitHub runner
     runs-on: windows-latest
     steps:
-      - name: Get-PhysicalDisk
-        shell: powershell
-        run: Get-PhysicalDisk
       - name: Get-PSDrive
         shell: powershell
         run: Get-PSDrive
@@ -30,9 +27,9 @@ jobs:
       - name: Get-NetIPConfiguration
         shell: powershell
         run: Get-NetIPConfiguration
-      - name: Get-CimInstance -ClassName Win32_Processor | Format-List
+      - name: Get-CimInstance -ClassName Win32_Processor | Format-List -Property *
         shell: powershell
-        run: Get-CimInstance -ClassName Win32_Processor | Format-List
+        run: Get-CimInstance -ClassName Win32_Processor | Format-List -Property *
       - name: Get-CimInstance -ClassName Win32_PhysicalMemory
         shell: powershell
         run: |
