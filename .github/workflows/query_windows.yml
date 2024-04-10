@@ -46,6 +46,9 @@ jobs:
       - name: Get-CimInstance -ClassName Win32_OperatingSystem | Format-List -Property *
         shell: powershell
         run: Get-CimInstance -ClassName Win32_OperatingSystem | Format-List -Property *
+      - name: Get-WindowsDriver -Online
+        shell: powershell
+        run: Get-WindowsDriver -Online | Select-Object -Property BootCritical,ClassName,ProviderName,Version,Date | Sort-Object -Property @{Expression="BootCritical";Descending=$true},ClassName,ProviderName,Version | Format-Table
       - name: bcdedit
         run: bcdedit
       - name: dir /a

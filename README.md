@@ -38,11 +38,10 @@ Frankly I was expecting the metadata server to be cloaked. It was not the case.
       region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/?regions=us-west%2cnon-regional&products=all),
       with a list price of 0.428$USD/h.
 - Disk
-    - OS disk is Premium_LRS, 256GiB on [P15 performance
+    - `C:\` is Premium_LRS, 256GiB on [P15 performance
       tier](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits)
       1100 IOPS / 125 MBps.
-    - Local 150GiB temporary local SSD mounted as `D:\` with 19000 IOPS / 250
-      MBps.
+    - `D:\` is 150GiB temporary local SSD mounted as with 19000 IOPS / 250 MBps.
     - `pagefile.sys` is on `D:\`.
 - Security
     - Windows Server 2022
