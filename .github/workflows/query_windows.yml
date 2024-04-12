@@ -175,11 +175,9 @@ jobs:
           path: screenshot.png
           compression-level: 0
           retention-days: 2
-      - name: Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe (install winget)
+      - name: Get-AppxPackage
         shell: powershell
-        run: Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
-      - name: winget list
-        run: winget list
+        run: Get-AppxPackage
       - name: Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name,Version
         shell: powershell
         # Sadly this step is extremely slow because there's a ton of
