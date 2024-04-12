@@ -175,7 +175,7 @@ jobs:
           path: screenshot.png
           compression-level: 0
           retention-days: 2
-      - name Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe (install winget)
+      - name: Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe (install winget)
         shell: powershell
         run: Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
       - name: winget list
