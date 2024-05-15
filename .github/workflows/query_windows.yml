@@ -70,6 +70,10 @@ jobs:
         run: dir /a c:\runners
       - name: set
         run: set
+      - name: where winget
+        run: where winget
+      - name: where nuget
+        run: where nuget
       - name: tasklist /v
         run: tasklist /v
       - name: tasklist /svc
