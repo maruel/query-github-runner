@@ -1,0 +1,18 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  query:
+    name: Query Ubuntu ARM64 GitHub runner
+    # https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353
+    # https://github.blog/changelog/2025-01-16-linux-arm64-hosted-runners-now-available-for-free-in-public-repositories-public-preview/
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: curl http://169.254.169.254/...
+        run: curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-12-13"
+      - name: df -h
+        run: df -h
+      - name: export
+        run: export

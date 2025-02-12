@@ -4,6 +4,12 @@ This repository defines a workflow that queries a lot of information from the
 running environment. This help understanding the differences in behavior on the
 runner versus a local environment.
 
+## Linux ARM64
+
+TODO
+
+## Windows
+
 While https://github.com/actions/runner-images provides information about the
 base image, it doesn't contain the sources of
 `c:\actions\runner-provision-Windows\provisioner.exe`
@@ -14,13 +20,13 @@ to see the output of all the things queried in the workflow.
 
 Here's a few interesting bits:
 
-## Screenshot
+### Screenshot
 
 I wonder what these two notifications are.
 
 ![screenshot.png](screenshot.png)
 
-## TL;DR
+### TL;DR
 
 - VM size is Standard_D4ads_v5 on Azure.
     - 2 Cores (HyperThreaded), [AMD 3rd Gen EPYC
@@ -65,7 +71,7 @@ I wonder what these two notifications are.
 - GitHub's corp subscription is bd1c5232-854f-4487-b341-930c8ec8497b.
 
 
-## Get-Disk
+### Get-Disk
 
 While this is not called out here, the second disk is significantly faster.
 
@@ -77,7 +83,7 @@ Number Friendly Name Serial Number                    HealthStatus         Opera
 1      Virtual HD                                     Healthy              Online                     150 GB MBR
 ```
 
-## Get-PSDrive
+### Get-PSDrive
 
 ```
 Name           Used (GB)     Free (GB) Provider      Root                                               CurrentLocation
@@ -96,7 +102,7 @@ WSMan                                  WSMan
 ```
 
 
-## Get-CimInstance -ClassName Win32_Processor | Format-List -Property *
+### Get-CimInstance -ClassName Win32_Processor | Format-List -Property *
 
 ```
 Availability                            : 3
@@ -163,7 +169,7 @@ CimSystemProperties                     : Microsoft.Management.Infrastructure.Ci
 ```
 
 
-## Get-CimInstance -ClassName Win32_PhysicalMemory
+### Get-CimInstance -ClassName Win32_PhysicalMemory
 
 This one is weird.
 
@@ -206,7 +212,7 @@ TypeDetail          : 4
 ```
 
 
-## Get-CimInstance Win32_StartupCommand
+### Get-CimInstance Win32_StartupCommand
 
 ```
 Command                                                    User   Caption
@@ -217,7 +223,7 @@ C:\PROGRA~1\MICROS~4\SERVIC~1\Tools\SERVIC~2\SERVIC~1.EXE  Public Service Fabric
 ```
 
 
-# Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
+### Get-WmiObject -Class Win32_Product | Select-Object -Property Name,Version | Sort-Object -Property Name
 
 Why the heck Epic Games Launcher is installed? I hear it's because of Visual
 Studio.
@@ -901,7 +907,7 @@ WPTx64 (OnecoreUAP)                                                           10
 Xamarin Remoted iOS Simulator                                                 17.6.0.524
 ```
 
-## .. and more!
+### .. and more!
 
 This is just an highlight. See recent actions at
 https://github.com/maruel/query-github-runner/actions/workflows/query_windows.yml

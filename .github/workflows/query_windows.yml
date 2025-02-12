@@ -9,7 +9,7 @@ defaults:
 
 jobs:
   query:
-    name: Query GitHub runner
+    name: Query Windows GitHub runner
     runs-on: windows-latest
     steps:
       - name: Invoke-RestMethod http://169.254.169.254/...
