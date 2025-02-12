@@ -16,3 +16,5 @@ jobs:
         run: df -h
       - name: export
         run: export
+      - name: apt list --installed
+        run: apt list --installed
