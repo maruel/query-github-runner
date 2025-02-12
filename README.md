@@ -6,7 +6,11 @@ runner versus a local environment.
 
 ## Linux ARM64
 
-TODO
+[`ubuntu-24.04-arm`](https://github.blog/changelog/2025-01-16-linux-arm64-hosted-runners-now-available-for-free-in-public-repositories-public-preview/)
+runs
+[Standard_D4pds_v6](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpdsv6-series).
+Its has 4 Cobalt vCPU and 16GB of RAM and 220GB of local NVMe SSD.
+
 
 ## Windows
 

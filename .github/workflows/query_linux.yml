@@ -26,6 +26,8 @@ jobs:
         run: lsblk
       - name: mount
         run: mount
+      - name: parted -l
+        run: sudo parted -l
 
       # Environment
       - name: pwd
@@ -40,5 +42,5 @@ jobs:
       # Preinstalled software
       - name: cat /etc/os-release
         run: cat /etc/os-release
-      - name: apt-get list --installed
-        run: apt-get list --installed
+      - name: apt list --installed
+        run: apt list --installed 2> /dev/null
