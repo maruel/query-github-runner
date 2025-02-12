@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: curl http://169.254.169.254/...
-        run: curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-12-13"
+        run: |
+          curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-12-13"
       - name: df -h
         run: df -h
       - name: export
