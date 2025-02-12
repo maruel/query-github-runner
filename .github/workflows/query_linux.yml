@@ -10,12 +10,35 @@ jobs:
     # https://github.blog/changelog/2025-01-16-linux-arm64-hosted-runners-now-available-for-free-in-public-repositories-public-preview/
     runs-on: ubuntu-24.04-arm
     steps:
+      # Machine
       - name: curl http://169.254.169.254/...
         run: |
-          curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-12-13"
+          curl -sS -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-12-13" | python -m json.tool
+      - name: cat /proc/cpuinfo
+        run: cat /proc/cpuinfo
+      - name: cat /proc/meminfo
+        run: cat /proc/meminfo
+
+      # Disk
       - name: df -h
         run: df -h
+      - name: lsblk
+        run: lsblk
+      - name: mount
+        run: mount
+
+      # Environment
+      - name: pwd
+        run: pwd
       - name: export
         run: export
-      - name: apt list --installed
-        run: apt list --installed
+      - name: cat /etc/group
+        run: cat /etc/group
+      - name: ps auxf
+        run: ps auxf
+
+      # Preinstalled software
+      - name: cat /etc/os-release
+        run: cat /etc/os-release
+      - name: apt-get list --installed
+        run: apt-get list --installed
