@@ -9,8 +9,12 @@ runner versus a local environment.
 [`ubuntu-24.04-arm`](https://github.blog/changelog/2025-01-16-linux-arm64-hosted-runners-now-available-for-free-in-public-repositories-public-preview/)
 runs
 [Standard_D4pds_v6](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpdsv6-series).
-Its has 4 Cobalt vCPU and 16GB of RAM and 220GB of local NVMe SSD.
+Its has 4 Cobalt vCPU ARM64, 16GB of RAM, 50GB of available remote disk, and 220GB of local NVMe SSD.
 
+As of 2025-02-12, the local SSD is not partitionned nor formatted. I expect
+this to change in the future. This will greatly improve performance.
+
+X is not running. PHP, dbus are running.
 
 ## Windows
 
